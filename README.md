@@ -1,10 +1,10 @@
 # Local Event Booking System
 
-# Concept
+## Concept
 
 A system for booking tickets to local events like concerts and sports games. Users can select events, choose how many tickets they want (up to 5\) and add extras like parking passes. The system calculates the total price and applies discounts.
 
-# Core Features
+## Core Features
 
 1. Welcome Message Display: "Welcome to Local Event Booking System"  
 2. Event Menu Display: Show different event categories (concerts, sports, workshops) with their base prices  
@@ -18,6 +18,6 @@ A system for booking tickets to local events like concerts and sports games. Use
 10. Show Customer Total Bill: Display itemized bill with discount applied  
 11. Coupon Code Redemption: Allow entering coupon codes for additional discount
 
-# Why It's Important
+## Why It's Important
 
 We picked this project because it solves a real problem people face when booking event tickets while letting us show off what we've learned about assembly programming. Working with money calculations and user choices in assembly language gives us valuable skills that matter in the real world.
