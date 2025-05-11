@@ -54,7 +54,7 @@ By building this system from the ground up, we explored how simple real-world pr
 
 ## 🛠️ How to Run
 
-### Option 1: Using EMU8086
+### Using EMU8086
 
 1. Open the `.asm` file in EMU8086.
 2. Compile and run using the emulator's interface.
