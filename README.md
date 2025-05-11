@@ -1,23 +1,78 @@
-# Local Event Booking System
+# 🎟️ Local Event Booking System
 
-## Concept
+A text-based based Local Event Booking System written in **Intel 8086 Assembly**, allowing users to book tickets for concerts, sports games, and workshops. Built to simulate real-world event booking logic using low-level programming principles, this project demonstrates essential concepts such as input validation, conditional logic, price calculation, and discount application.
 
-A system for booking tickets to local events like concerts and sports games. Users can select events, choose how many tickets they want (up to 5\) and add extras like parking passes. The system calculates the total price and applies discounts.
+---
 
-## Core Features
+## 🚀 Features
 
-1. Welcome Message Display: "Welcome to Local Event Booking System"  
-2. Event Menu Display: Show different event categories (concerts, sports, workshops) with their base prices  
-3. Ticket Quantity Input: Allow purchase of maximum 5 tickets per event  
-4. Event Code Selection: Take input for event codes (For example, "C" for concert)  
-5. Display Error Message: When ticket quantity exceeds 5  
-6. Display Error Message: When an invalid event code is entered  
-7. Extras Selection: Allow selection of add-ons (parking, merchandise, VIP upgrade)  
-8. Calculate Total Bill: Based on event type, quantity, and extras  
-9. Group Discount Application: Apply 15% discount for 3+ tickets  
-10. Show Customer Total Bill: Display itemized bill with discount applied  
-11. Coupon Code Redemption: Allow entering coupon codes for additional discount
+* 👋 **Welcome Message:** Greets the user with a welcome message.
+* 🎭 **Event Selection:**
 
-## Why It's Important
+  * Concert (`C`)
+  * Sports (`S`)
+  * Workshop (`W`)
+* 🔢 **Ticket Input:** Purchase up to 5 tickets.
+* ❗ **Input Validation:**
 
-We picked this project because it solves a real problem people face when booking event tickets while letting us show off what we've learned about assembly programming. Working with money calculations and user choices in assembly language gives us valuable skills that matter in the real world.
+  * Error if ticket quantity exceeds 5
+  * Error on invalid event code
+* ➕ **Extras:** Optional add-ons:
+
+  * Parking
+  * Merchandise
+  * VIP Upgrade
+* 💰 **Billing Logic:**
+
+  * Calculates cost based on event type and ticket count
+  * Applies **15% group discount** for 3 or more tickets
+  * Accepts **coupon codes** for additional savings
+* 📋 **Final Bill Display:** Shows an itemized breakdown and total price
+
+---
+
+## 💡 Educational Purpose
+
+This system simulates a real-world application while showcasing:
+
+* Use of **registers** and **memory management**
+* User **input handling** via keyboard interrupts
+* **Arithmetic operations** and logic flow control
+* Conditional branching and looping in **8086 Assembly**
+
+By building this system from the ground up, we explored how simple real-world problems can be handled with low-level hardware logic.
+
+---
+
+## 💻 Platform
+
+* **Language:** Assembly Language (Intel 8086)
+* **Architecture:** x86 (Real Mode)
+* **Recommended Emulator:** [EMU8086](https://emu8086-microprocessor-emulator.en.softonic.com/)
+
+---
+
+## 🛠️ How to Run
+
+### Option 1: Using EMU8086
+
+1. Open the `.asm` file in EMU8086.
+2. Compile and run using the emulator's interface.
+
+---
+
+## 📦 Sample Use Cases
+
+| Scenario                         | Expected Outcome                 |
+| -------------------------------- | -------------------------------- |
+| 2 concert tickets + parking      | No discount, parking fee added   |
+| 4 sports tickets + VIP           | 15% group discount applied       |
+| 3 workshop tickets + coupon code | Group + coupon discounts applied |
+
+---
+
+## 👥 Contributors
+
+* **Rauf & Team**
+
+---
