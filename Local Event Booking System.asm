@@ -5,7 +5,7 @@
 welcomeMsg1 DB '********************************************************$'
 welcomeMsg2 DB '**      Welcome to CITY EVENT BOOKING SYSTEM          **$'
 welcomeMsg3 DB '********************************************************$'
-newline DB 13, 10, '$'    
+newline DB 13, 10, '$'
 
 eventCategoryMsg DB '**            EVENT CATEGORIES                     **$'
 concertMsg       DB '**  [C] Concerts         - BDT 500                 **$'
@@ -57,9 +57,9 @@ validCouponMsg   DB 'Coupon successfully applied! 10% discount.$'
 
 eventPrices      DW 500, 300, 200    
 extraPrices      DW 100, 150, 250    
-digitArray       DB 5 DUP(0)         
+digitArray       DB 5 DUP(0)        
 
-eventType        DB ?        
+eventType        DB ?       
 eventPrice       DW 0        
 numTickets       DB 0        
 hasParking       DB 0        
@@ -81,6 +81,11 @@ thousands        DB ?
 tenThousands     DB ?
 
 divider          DB '------------------------------------------------$'
+
+tempAX           DW 0
+tempBX           DW 0
+tempCX           DW 0
+tempDX           DW 0
 
 .CODE
 MAIN PROC
@@ -143,8 +148,7 @@ SportSelected:
     
 WorkshopSelected:
     MOV SI, 4            
-    JMP GetEventPrice
-
+    
 GetEventPrice:
     MOV AX, eventPrices[SI]  
     MOV eventPrice, AX
@@ -218,7 +222,7 @@ ExtrasInit:
     
 SelectExtras:
     CMP extrasCount, 3
-    JE CalculateBill   
+    JE CalculateBill
     
     CALL PrintNewline
     LEA DX, promptWhichExtra
@@ -242,7 +246,7 @@ SelectExtras:
     
 AddParking:
     CMP hasParking, 1
-    JNE SetParking   
+    JNE SetParking
     
     CALL PrintNewline
     LEA DX, alreadySelectedMsg
@@ -256,7 +260,7 @@ SetParking:
     
 AddMerchandise:
     CMP hasMerch, 1
-    JNE SetMerchandise   
+    JNE SetMerchandise
     
     CALL PrintNewline
     LEA DX, alreadySelectedMsg
@@ -270,7 +274,7 @@ SetMerchandise:
     
 AddVIP:
     CMP hasVIP, 1
-    JNE SetVIP   
+    JNE SetVIP
     
     CALL PrintNewline
     LEA DX, alreadySelectedMsg
@@ -317,9 +321,9 @@ CheckGroupDiscount:
     
     MOV AX, subtotal
     MOV BX, 15
-    MUL BX          
+    MUL BX
     MOV BX, 100
-    DIV BX          
+    DIV BX
     MOV discount, AX
     
 CouponPrompt:
@@ -340,7 +344,7 @@ CouponPrompt:
     JMP CouponPrompt
     
 NoCouponSelected:
-    MOV couponDisc, 0    
+    MOV couponDisc, 0
     CALL PrintNewline
     LEA DX, noCouponMsg
     CALL PrintString
@@ -375,9 +379,9 @@ ValidateCouponLoop:
     
     MOV AX, subtotal
     MOV BX, 10
-    MUL BX              
+    MUL BX
     MOV BX, 100
-    DIV BX              
+    DIV BX
     MOV couponDisc, AX
     
     CALL PrintNewline
@@ -426,7 +430,6 @@ DisplaySports:
     
 DisplayWorkshop:
     LEA DX, workshopType
-    JMP PrintEventType
     
 PrintEventType:
     CALL PrintString
@@ -436,7 +439,7 @@ PrintEventType:
     CALL PrintString
     
     MOV DL, numTickets
-    ADD DL, 30H     
+    ADD DL, 30H
     MOV AH, 2
     INT 21H
     
@@ -535,51 +538,51 @@ ExitProgram:
 MAIN ENDP
 
 PrintNewline PROC
-    PUSH DX
-    PUSH AX
+    MOV tempDX, DX
+    MOV tempAX, AX
     
     LEA DX, newline
     MOV AH, 9
     INT 21H
     
-    POP AX
-    POP DX
+    MOV AX, tempAX
+    MOV DX, tempDX
     RET
 PrintNewline ENDP
 
 PrintString PROC
-    PUSH AX
+    MOV tempAX, AX
     
     MOV AH, 9
     INT 21H
     
-    POP AX
+    MOV AX, tempAX
     RET
 PrintString ENDP
 
 GetCharToUpper PROC
-    PUSH BX
+    MOV tempBX, BX
     
-    MOV AH, 1       
+    MOV AH, 1
     INT 21H
     
     CMP AL, 'a'
     JB NotLowerCase
     CMP AL, 'z'
     JA NotLowerCase
-    SUB AL, 32      
+    SUB AL, 32
     
 NotLowerCase:
-    POP BX
+    MOV BX, tempBX
     RET
 GetCharToUpper ENDP
 
 DisplayExtras PROC
-    PUSH AX
-    PUSH BX
-    PUSH DX
+    MOV tempAX, AX
+    MOV tempBX, BX
+    MOV tempDX, DX
     
-    MOV BH, 0       
+    MOV BH, 0
     
     CMP hasParking, 1
     JNE CheckDisplayMerchandise
@@ -603,81 +606,81 @@ CheckDisplayVIP:
     
 FinishExtrasDisplay:
     CMP BH, 0
-    JNE DisplayExtrasDone   
+    JNE DisplayExtrasDone
     LEA DX, noExtrasSelected
     CALL PrintString
     
 DisplayExtrasDone:
-    POP DX
-    POP BX
-    POP AX
+    MOV DX, tempDX
+    MOV BX, tempBX
+    MOV AX, tempAX
     RET
 DisplayExtras ENDP
 
 DisplayNumber PROC
-    PUSH AX
-    PUSH BX
-    PUSH CX
-    PUSH DX
+    MOV tempAX, AX
+    MOV tempBX, BX
+    MOV tempCX, CX
+    MOV tempDX, DX
     
     LEA SI, digitArray
-    MOV CX, 5            
+    MOV CX, 5
     MOV BX, 0
     
 ClearDigitArray:
-    MOV digitArray[BX], 0 
+    MOV digitArray[BX], 0
     INC BX
     LOOP ClearDigitArray
     
     MOV BX, 10000
-    MOV DX, 0            
-    DIV BX               
-    MOV digitArray[0], AL 
-    MOV AX, DX           
+    MOV DX, 0
+    DIV BX
+    MOV digitArray[0], AL
+    MOV AX, DX
     
     MOV BX, 1000
-    MOV DX, 0            
-    DIV BX               
-    MOV digitArray[1], AL 
-    MOV AX, DX           
+    MOV DX, 0
+    DIV BX
+    MOV digitArray[1], AL
+    MOV AX, DX
     
     MOV BX, 100
-    MOV DX, 0            
-    DIV BX               
-    MOV digitArray[2], AL 
-    MOV AX, DX           
+    MOV DX, 0
+    DIV BX
+    MOV digitArray[2], AL
+    MOV AX, DX
     
     MOV BX, 10
-    MOV DX, 0            
-    DIV BX               
-    MOV digitArray[3], AL 
-    MOV digitArray[4], DL 
+    MOV DX, 0
+    DIV BX
+    MOV digitArray[3], AL
+    MOV digitArray[4], DL
     
-    MOV SI, 0            
-    MOV CX, 4            
+    MOV SI, 0
+    MOV CX, 4
     
 CheckLeadingZeros:
     CMP digitArray[SI], 0
-    JNE PrintDigits      
+    JNE PrintDigits
     INC SI
     LOOP CheckLeadingZeros
     
 PrintDigits:
     MOV CX, 5
-    SUB CX, SI           
+    SUB CX, SI
     
 PrintLoop:
     MOV DL, digitArray[SI]
-    ADD DL, 30H          
+    ADD DL, 30H
     MOV AH, 2
     INT 21H
     INC SI
     LOOP PrintLoop
     
-    POP DX
-    POP CX
-    POP BX
-    POP AX
+    MOV DX, tempDX
+    MOV CX, tempCX
+    MOV BX, tempBX
+    MOV AX, tempAX
     RET
 DisplayNumber ENDP
 
