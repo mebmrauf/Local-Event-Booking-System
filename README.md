@@ -73,6 +73,8 @@ By building this system from the ground up, we explored how simple real-world pr
 
 ## 👥 Contributors
 
-* **Rauf & Team**
+- **B M Rauf**
+- **Siam Ferdous**
+- **Md Ridwanul Basit**
 
 ---
