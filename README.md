@@ -47,7 +47,7 @@ By building this system from the ground up, we explored how simple real-world pr
 ## 💻 Platform
 
 * **Language:** Assembly Language (Intel 8086)
-* **Architecture:** x86 (Real Mode)
+* **Architecture:** x86
 * **Recommended Emulator:** [EMU8086](https://emu8086-microprocessor-emulator.en.softonic.com/)
 
 ---
